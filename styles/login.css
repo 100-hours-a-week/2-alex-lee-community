@@ -1,0 +1,107 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 스타일 */
+header {
+    background: #fff;
+    padding: 5px 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* 헤더 제목 크기 조절 */
+.header-title {
+    font-size: 15px;
+    margin: 0;
+}
+
+/* 헤더와 본문 구분선 */
+hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 5px 0;
+}
+
+/* 헤더와 본문 구분선 */
+hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 0;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    margin-top: 50px;
+}
+
+/* 로그인 박스 */
+.login-box {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+label {
+    text-align: left;
+    margin-left: 5px;
+}
+
+/* 입력 필드 스타일 */
+input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    
+}
+
+/* 라벨 스타일 (왼쪽 정렬) */
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 버튼 스타일 */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #a78bfa;
+    color: white;
+    margin-top: 10px;
+}
+
+.signup-btn {
+    background: transparent;
+    color: #333;
+    margin-top: 10px;
+    text-decoration: underline;
+    border: none;
+}
+
+/* helper text */
+.helper-text {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+}

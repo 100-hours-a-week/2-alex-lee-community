@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+
+    <!-- 헤더 포함 -->
+    <div id="header"></div>
+
+    <div class="container">
+        <div class="login-box">
+            <h2>로그인</h2>
+            <form id="loginForm">
+                <label for="email" class="form-label">이메일</label>
+                <input type="email" id="email" placeholder="이메일을 입력하세요" required>
+
+                <label for="password" class="form-label">비밀번호</label>
+                <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
+
+                <button type="submit" class="login-btn">로그인</button>
+            </form>
+            <button class="signup-btn">회원가입</button>
+        </div>
+    </div>
+
+    <script src="../scripts/login.js"></script>
+    <script>
+        // 헤더 포함 (JavaScript로 동적으로 추가)
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header").innerHTML = data);
+    </script>
+
+</body>
+</html>
