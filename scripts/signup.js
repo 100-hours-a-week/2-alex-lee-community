@@ -68,13 +68,12 @@ async function validateAll() {
   const isPasswordCheckValid = validatePasswordCheck(passwordValue, passwordCheckValue);
   const isNicknameValid = validateNickname(nicknameValue);
 
+  // (중복 체크 제거)
   const allValid = 
     isEmailValid && 
-    !isEmailDuplicate && 
     isPasswordValid && 
     isPasswordCheckValid && 
-    isNicknameValid && 
-    !isNicknameDuplicate;
+    isNicknameValid;
 
   if (allValid) {
     signupBtn.disabled = false;
