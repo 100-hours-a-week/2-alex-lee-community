@@ -2,6 +2,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const postList = document.getElementById("postList");
     const createPostBtn = document.getElementById("createPostBtn");
   
+    const headerIcon = document.getElementById("headerIcon");
+    const profileMenu = document.getElementById("profileMenu");
+  
+    headerIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (profileMenu.style.display === "block") {
+        profileMenu.style.display = "none";
+      } else {
+        profileMenu.style.display = "block";
+      }
+    });
+  
+    document.addEventListener("click", () => {
+      profileMenu.style.display = "none";
+    });
+    profileMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  
+
+    const editInfoBtn = document.getElementById("editInfoBtn");
+    const changePwBtn = document.getElementById("changePwBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+  
+    editInfoBtn.addEventListener("click", () => {
+      alert("회원정보수정 페이지로 이동 (예시)");
+    
+    });
+    changePwBtn.addEventListener("click", () => {
+      alert("비밀번호수정 페이지로 이동 (예시)");
+    
+    });
+    logoutBtn.addEventListener("click", () => {
+
+    });
+  
+
     fetch("../data/posts.json")
       .then(response => {
         if (!response.ok) {
@@ -64,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     createPostBtn.addEventListener("click", () => {
-      alert("게시글 작성 페이지로 이동합니다 (예시)");
+      window.location.href = "createPost.html";
     });
   });
   

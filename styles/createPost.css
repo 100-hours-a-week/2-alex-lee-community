@@ -1,0 +1,107 @@
+/* 전체 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background: #fff;
+  }
+  
+  /* 헤더 */
+  .main-header {
+    position: relative;
+    background: #fff;
+    text-align: center;
+    height: 93px; 
+  }
+  
+  .header-back-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  
+  .header-title {
+    font-size: 35px;
+    margin: 0;
+    padding-top: 30px;
+  }
+  
+  .header-icon {
+    position: absolute;
+    right: 330px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 50px;
+  }
+  
+  /* 구분선 */
+  hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 5px 0;
+  }
+  
+  /* 메인 컨텐츠 (게시글 작성 폼) */
+  .create-post-content {
+    width: 50%;
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .create-post-heading {
+    margin-bottom: 30px;
+    font-weight: normal;
+  }
+  
+  /* 폼 그룹 */
+  .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group textarea,
+  .form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* 헬퍼 텍스트 */
+  .helper-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  /* 업로드 버튼 */
+  .submit-btn {
+    background-color: #7F6AEE;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  

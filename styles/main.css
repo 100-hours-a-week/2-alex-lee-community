@@ -31,6 +31,43 @@
     transform: translateY(-50%);
     width: 80px;
     height: 50px;
+    cursor: pointer;
+  }
+  
+  .profile-menu {
+    position: absolute;
+    top: 70px;
+    right: 330px;
+    width: 120px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 9999;
+  }
+  
+  .profile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .profile-menu li {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-menu li:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-menu li:hover {
+    background: #f4f4f4;
   }
   
   /* 구분선 */
@@ -137,3 +174,4 @@
     background: #ccc;  
     margin: 20px 0;    
   }
+  
