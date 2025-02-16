@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logoutBtn");
   
     editInfoBtn.addEventListener("click", () => {
-      alert("회원정보수정 페이지로 이동 (예시)");
+        window.location.href = "mypage.html"; 
     
     });
     changePwBtn.addEventListener("click", () => {
