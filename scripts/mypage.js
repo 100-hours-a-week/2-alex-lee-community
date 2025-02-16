@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
     changePwBtn.addEventListener("click", () => {
-      alert("비밀번호수정 페이지로 이동 (예시)");
+        window.location.href = "changePw.html";
     });
   
     logoutBtn.addEventListener("click", () => {
