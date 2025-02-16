@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>아무 말 대잔치 - 게시글 상세</title>
+  <link rel="stylesheet" href="../styles/postDetail.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <h1 class="header-title">아무 말 대잔치</h1>
+
+    <img 
+      src="../data/headerIcon.png" 
+      alt="헤더 아이콘" 
+      class="header-icon"
+      id="headerIcon"
+    />
+    <div class="profile-menu" id="profileMenu">
+      <ul>
+        <li id="editInfoBtn">회원정보수정</li>
+        <li id="changePwBtn">비밀번호수정</li>
+        <li id="logoutBtn">로그아웃</li>
+      </ul>
+    </div>
+  </header>
+  <hr />
+
+  <main class="detail-content">
+    <section class="post-header" id="postHeader"></section>
+
+    <div class="post-image" id="postImage"></div>
+
+    <div class="post-body" id="postBody"></div>
+
+    <div class="post-footer" id="postFooter"></div>
+
+    <section class="comment-section">
+      <hr class="comment-divider" />
+      <div class="comment-form">
+        <textarea id="commentInput" placeholder="댓글을 남겨주세요"></textarea>
+        <div class="comment-form-btn">
+          <button id="commentSubmitBtn">댓글 등록</button>
+        </div>
+      </div>
+
+      <div id="commentList" class="comment-list"></div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-box">
+      <h2 class="modal-title">게시글을 삭제하시겠습니까?</h2>
+      <p class="modal-desc">삭제한 내용은 복구할 수 없습니다.</p>
+      <div class="modal-btn-group">
+        <button id="modalCancelBtn" class="modal-cancel">취소</button>
+        <button id="modalConfirmBtn" class="modal-confirm">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="commentDeleteModal">
+    <div class="modal-box">
+      <h2 class="modal-title">댓글을 삭제하시겠습니까?</h2>
+      <p class="modal-desc">삭제한 내용은 복구할 수 없습니다.</p>
+      <div class="modal-btn-group">
+        <button id="commentModalCancelBtn" class="modal-cancel">취소</button>
+        <button id="commentModalConfirmBtn" class="modal-confirm">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/postDetail.js"></script>
+</body>
+</html>
