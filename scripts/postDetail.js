@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
       actionsElem.className = "post-actions";
   
       const editBtn = document.createElement("button");
-      editBtn.className = "action-btn";
-      editBtn.textContent = "수정";
-      editBtn.addEventListener("click", () => {
-        alert("게시글 수정 (예시)");
-      });
+        editBtn.className = "action-btn";
+        editBtn.textContent = "수정";
+        editBtn.addEventListener("click", () => {
+            window.location.href = `postEdit.html?id=${post.id}`;
+        });
   
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "action-btn";
