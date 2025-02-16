@@ -5,8 +5,8 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     const password = document.getElementById("password").value;
 
     //HACK: 테스트를 위한 코드
-    if (email === "test@example.com" && password === "1234") {
-        alert("로그인 성공!");
+    if (email === "kanado@naber.com" && password === "@@Saske5385") {
+        window.location.href = "main.html";
     } else {
         alert("이메일 또는 비밀번호가 올바르지 않습니다.");
     }

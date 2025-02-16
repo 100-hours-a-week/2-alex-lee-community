@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>아무 말 대잔치 - 메인</title>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <h1 class="header-title">아무 말 대잔치</h1>
+    <img 
+      src="../data/headerIcon.png" 
+      alt="헤더 아이콘" 
+      class="header-icon" 
+    />
+  </header>
+  <hr />
+
+  <main class="main-content">
+    <section class="welcome-section">
+      <div class="welcome-text">
+        <h2>안녕하세요,</h2>
+        <p>
+          아무 말 대잔치 <strong>게시판</strong>입니다.
+        </p>
+      </div>
+      <button id="createPostBtn" class="create-post-btn">게시글 작성</button>
+    </section>
+
+    <section class="post-list" id="postList">
+    </section>
+  </main>
+
+  <script src="../scripts/main.js"></script>
+</body>
+</html>
