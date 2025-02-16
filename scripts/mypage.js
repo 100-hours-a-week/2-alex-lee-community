@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 드롭다운 메뉴 토글
     const headerIcon = document.getElementById("headerIcon");
     const profileMenu = document.getElementById("profileMenu");
+    const withdrawBtn = document.getElementById("withdrawBtn");
+    const withdrawModal = document.getElementById("withdrawModal");
+    const modalCancelBtn = document.getElementById("modalCancelBtn");
+    const modalConfirmBtn = document.getElementById("modalConfirmBtn");
   
     headerIcon.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -58,14 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "main.html";
     });
   
-    // 회원 탈퇴 버튼
-    const withdrawBtn = document.getElementById("withdrawBtn");
     withdrawBtn.addEventListener("click", () => {
-      if (confirm("정말 회원탈퇴 하시겠습니까?")) {
-        alert("회원탈퇴 처리되었습니다 (예시).");
-        window.location.href = "login.html";
-      }
-    });
+        withdrawModal.style.display = "flex"; 
+      });
+    
+      modalCancelBtn.addEventListener("click", () => {
+        withdrawModal.style.display = "none";
+      });
+    
+      modalConfirmBtn.addEventListener("click", () => {
+
+      });
   
     const completeBtn = document.getElementById("completeBtn");
     completeBtn.addEventListener("click", () => {

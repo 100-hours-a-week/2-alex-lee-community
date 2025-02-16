@@ -32,7 +32,6 @@
     <div class="profile-section">
       <label for="profileImage" class="profile-label">
         <div class="profile-circle">
-
           <button type="button" class="profile-change-btn">변경</button>
         </div>
       </label>
@@ -49,13 +48,25 @@
         <label for="nickname">닉네임</label>
         <input type="text" id="nickname" placeholder="닉네임" />
       </div>
-      <button type="submit" class="update-btn">수정하기</button>
 
+      <button type="submit" class="update-btn">수정하기</button>
       <button type="button" class="withdraw-btn" id="withdrawBtn">회원 탈퇴</button>
     </form>
 
     <button type="button" class="complete-btn" id="completeBtn">수정완료</button>
   </main>
+
+  <!-- (1) 탈퇴 팝업(모달) HTML 추가 -->
+  <div class="modal-overlay" id="withdrawModal">
+    <div class="modal-box">
+      <h2 class="modal-title">회원탈퇴 하시겠습니까?</h2>
+      <p class="modal-desc">작성된 게시글과 댓글은 삭제됩니다.</p>
+      <div class="modal-btn-group">
+        <button id="modalCancelBtn" class="modal-cancel">취소</button>
+        <button id="modalConfirmBtn" class="modal-confirm">확인</button>
+      </div>
+    </div>
+  </div>
 
   <script src="../scripts/mypage.js"></script>
 </body>
