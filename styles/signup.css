@@ -1,0 +1,128 @@
+/* 기본 스타일 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+  }
+  
+  /* 헤더(재사용) */
+  header {
+    background: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 5px 0;
+  }
+  
+  /* 메인 컨테이너 */
+  .signup-container {
+    width: 350px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left; /* 왼쪽 정렬 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* 프로필 컨테이너 */
+  .profile-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-label {
+    cursor: pointer;
+  }
+  
+  .profile-circle {
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .plus-icon {
+    font-size: 30px;
+    color: #ccc;
+  }
+  
+  /* 폼 요소 */
+  form label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* helper text */
+  .helper-text {
+    font-size: 12px;
+    color: red;
+    margin: 2px 0 0 0;
+  }
+  
+  /* 회원가입 버튼 (비활성화 / 활성화 시 색상 변경) */
+  .signup-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #ACA0Eb; /* 기본 비활성화 색상 */
+    color: #fff;
+  }
+  
+  .signup-btn:disabled {
+    cursor: not-allowed;
+    background-color: #ACA0Eb;
+  }
+  
+  /* 활성화 상태 시 버튼 색상 */
+  .signup-btn.active {
+    background-color: #7F6AEE; /* 활성화 시 색상 */
+  }
+  
+  /* 로그인 페이지로 이동 버튼 */
+  .to-login-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+  }
+  

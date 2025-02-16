@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>회원가입</title>
+  <link rel="stylesheet" href="../styles/signup.css" />
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <div class="signup-container">
+    <h2>회원가입</h2>
+
+    <div class="profile-container">
+      <label for="profileImage" class="profile-label">
+        <div class="profile-circle">
+          <span class="plus-icon">+</span>
+        </div>
+      </label>
+      <input type="file" id="profileImage" accept="image/*" style="display: none;" />
+      <p class="helper-text" id="profileHelperText">프로필 사진 (선택)</p>
+    </div>
+
+    <form id="signupForm">
+      <label for="signupEmail">이메일</label>
+      <input 
+        type="text" 
+        id="signupEmail" 
+        placeholder="이메일을 입력하세요 (영문, @, . 만 가능)" 
+        required 
+      />
+      <p class="helper-text" id="emailHelperText"></p>
+
+      <label for="signupPassword">비밀번호</label>
+      <input 
+        type="password" 
+        id="signupPassword" 
+        placeholder="비밀번호 (8~20자, 대/소문자, 특수문자 포함)" 
+        required 
+      />
+      <p class="helper-text" id="passwordHelperText"></p>
+
+      <label for="signupPasswordCheck">비밀번호 확인</label>
+      <input 
+        type="password" 
+        id="signupPasswordCheck" 
+        placeholder="비밀번호 재입력" 
+        required 
+      />
+      <p class="helper-text" id="passwordCheckHelperText"></p>
+
+      <label for="signupNickname">닉네임</label>
+      <input 
+        type="text" 
+        id="signupNickname" 
+        placeholder="닉네임 (공백 불가, 최대 10자)" 
+        required 
+      />
+      <p class="helper-text" id="nicknameHelperText"></p>
+
+      <button 
+        type="submit" 
+        id="signupBtn" 
+        class="signup-btn" 
+        disabled
+      >
+        회원가입
+      </button>
+    </form>
+
+    <button class="to-login-btn" id="toLoginBtn">로그인 페이지로 가기</button>
+  </div>
+
+  <script src="../scripts/signup.js"></script>
+  <script>
+    fetch("header.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+  </script>
+</body>
+</html>
