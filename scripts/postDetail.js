@@ -50,6 +50,27 @@
     }
   };
 
+  // 댓글 삭제 API 호출 함수 (Async/Await 사용)
+  const deleteComment = async (commentId) => {
+    const userId = getCookie("user_id");
+    if (!userId) {
+      alert("로그인 정보가 없습니다.");
+      return;
+    }
+    try {
+      const response = await fetch(`/articles/comments/${commentId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId })
+      });
+      const data = await response.json();
+      return { status: response.status, data };
+    } catch (error) {
+      console.error(error);
+      alert("네트워크 오류 발생했습니다.");
+    }
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
     // 헤더 관련 요소
     const headerIcon = document.getElementById("headerIcon");
@@ -206,19 +227,16 @@
         commentEditBtn.className = "comment-btn";
         commentEditBtn.textContent = "수정";
         commentEditBtn.addEventListener("click", () => {
-          // 기존 댓글 내용 요소 선택
           const contentElem = commentItem.querySelector(".comment-content");
-          // 이미 수정 중이면 중복 생성 방지
           if (commentItem.querySelector("input.comment-edit-input")) return;
 
-          // 수정 입력창 생성
           const editInput = document.createElement("input");
           editInput.className = "comment-edit-input";
           editInput.type = "text";
           editInput.value = comment.content;
 
-          // 수정 완료 버튼 생성
           const finishBtn = document.createElement("button");
+          finishBtn.className = "comment-edit-finish-btn";
           finishBtn.textContent = "수정 완료";
           finishBtn.addEventListener("click", async () => {
             const newContent = editInput.value.trim();
@@ -226,7 +244,6 @@
               alert("댓글 내용을 입력해주세요!");
               return;
             }
-            // 댓글 수정 API 호출
             const result = await updateComment(comment.id, newContent);
             if (result.status === 201 && result.data.code === "SU") {
               alert("댓글 수정 성공!");
@@ -234,13 +251,11 @@
             } else {
               alert("댓글 수정에 실패했습니다.");
             }
-            // 수정 입력창과 버튼 제거, 원래 댓글 내용 보이기
             editInput.remove();
             finishBtn.remove();
             contentElem.style.display = "";
           });
 
-          // 기존 댓글 내용 숨김 후 수정 요소 추가
           contentElem.style.display = "none";
           commentItem.appendChild(editInput);
           commentItem.appendChild(finishBtn);
@@ -296,8 +311,15 @@
       selectedCommentId = null;
     });
 
-    commentModalConfirmBtn.addEventListener("click", () => {
-      alert(`댓글이 삭제되었습니다 (id: ${selectedCommentId}, 예시).`);
+    commentModalConfirmBtn.addEventListener("click", async () => {
+      // 댓글 삭제 API 호출
+      const result = await deleteComment(selectedCommentId);
+      if (result.status === 201 && result.data.code === "SU") {
+        alert("댓글이 삭제되었습니다!");
+        window.location.reload();
+      } else {
+        alert(result.data.message || "댓글 삭제에 실패했습니다.");
+      }
       commentDeleteModal.style.display = "none";
       selectedCommentId = null;
     });
