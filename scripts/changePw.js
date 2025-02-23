@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const headerIcon = document.getElementById("headerIcon");
   const profileMenu = document.getElementById("profileMenu");
 
+  const profilImageFromCookie = getCookie("profil_image");
+  if (profilImageFromCookie) {
+    headerIcon.src = profilImageFromCookie;
+  }
+
   headerIcon.addEventListener("click", (e) => {
     e.stopPropagation();
     profileMenu.style.display = (profileMenu.style.display === "block") ? "none" : "block";

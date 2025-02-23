@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toast.style.display = "block";
     setTimeout(() => (toast.style.display = "none"), 2000);
   };
+  
 
   // 쿠키에서 값을 가져오는 헬퍼 함수 (순수 함수)
   const getCookie = (name) => {
@@ -30,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const parts = value.split("; " + name + "=");
     return parts.length === 2 ? parts.pop().split(";").shift() : null;
   };
+
+  const profilImageFromCookie = getCookie("profil_image");
+  if (profilImageFromCookie) {
+    headerIcon.src = profilImageFromCookie;
+  }
 
   // API 호출 함수: 회원 정보 수정 (PATCH /users/information)
   const updateUserInfo = async (userId, nickname, profileImage) => {
