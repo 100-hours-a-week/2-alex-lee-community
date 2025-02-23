@@ -8,6 +8,17 @@
         return key === name ? decodeURIComponent(value) : acc;
       }, "");
 
+  // 특정 게시글 반환 API 호출 함수 (Async/Await 사용)
+  const getArticle = async (articleId) => {
+    try {
+      const response = await fetch(`/articles/${articleId}`);
+      const data = await response.json();
+      return { status: response.status, data };
+    } catch (error) {
+      alert("네트워크 오류 발생했습니다.");
+    }
+  };
+
   // 댓글 작성 API 호출 함수 (Async/Await 사용)
   const submitComment = async (articleId, commentContent) => {
     const userId = getCookie("user_id");
@@ -146,21 +157,14 @@
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get("id");
 
-    fetch("../data/posts.json")
-      .then((res) => res.json())
-      .then((posts) => {
-        const post = posts.find((p) => p.id == postId);
-        if (!post) {
-          alert("존재하지 않는 게시글입니다.");
-          window.location.href = "main.html";
-          return;
-        }
-        renderPostDetail(post);
-
+    // 특정 게시글 API 호출
+    getArticle(postId).then((result) => {
+      if (result.data.code === "SU") {
+        renderPostDetail(result.data);
         // 댓글 조회 API 연동
-        getComments(postId).then((result) => {
-          if (result && result.status === 200 && result.data.code === "SU") {
-            const commentData = result.data.commentList.map((c) => ({
+        getComments(postId).then((commentsResult) => {
+          if (commentsResult && commentsResult.data.code === "SU") {
+            const commentData = commentsResult.data.commentList.map((c) => ({
               id: c.comment_num,
               author: c.comment_writer,
               date: c.comment_date,
@@ -171,26 +175,27 @@
             renderComments([]);
           }
         });
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("게시글 정보를 불러오는 중 오류가 발생했습니다.");
+      } else {
         window.location.href = "main.html";
-      });
+      }
+    }).catch((err) => {
+      console.error(err);
+      window.location.href = "main.html";
+    });
 
     function renderPostDetail(post) {
       const postHeader = document.getElementById("postHeader");
 
       const titleElem = document.createElement("h2");
       titleElem.className = "post-header-title";
-      titleElem.textContent = post.title;
+      titleElem.textContent = post.article_title;
 
       const headerMeta = document.createElement("div");
       headerMeta.className = "post-header-meta";
 
       const authorDateElem = document.createElement("div");
       authorDateElem.className = "post-author-date";
-      authorDateElem.textContent = `${post.author} | ${post.date}`;
+      authorDateElem.textContent = `${post.article_writer} | ${post.article_date}`;
 
       const actionsElem = document.createElement("div");
       actionsElem.className = "post-actions";
@@ -199,7 +204,7 @@
       editBtn.className = "action-btn";
       editBtn.textContent = "수정";
       editBtn.addEventListener("click", () => {
-        window.location.href = `postEdit.html?id=${post.id}`;
+        window.location.href = `postEdit.html?id=${post.article_num}`;
       });
 
       const deleteBtn = document.createElement("button");
@@ -220,20 +225,20 @@
 
       // 게시글 본문 설정
       const postBody = document.getElementById("postBody");
-      postBody.textContent = post.content;
+      postBody.textContent = post.article_content;
 
       const postFooter = document.getElementById("postFooter");
       postFooter.innerHTML = `
         <div class="footer-item">
-          <span>${post.views}</span>
+          <span>${post.view_count}</span>
           <label>조회수</label>
         </div>
         <div class="footer-item">
-          <span>${post.likes}</span>
+          <span>${post.like_count}</span>
           <label>좋아요</label>
         </div>
         <div class="footer-item">
-          <span>${post.comments}</span>
+          <span>${post.comment_count}</span>
           <label>댓글</label>
         </div>
       `;
@@ -330,14 +335,14 @@
       deleteModal.style.display = "none";
     });
 
-    // 게시글 삭제 API 연동
+    // 게시글 삭제 API 연동: 게시글 삭제 모달 "확인" 버튼 클릭 시
     modalConfirmBtn.addEventListener("click", async () => {
       const result = await deletePost(postId);
-      if (result.data.code === "SU") {
+      if (result && result.data.code === "SU") {
         alert("게시글이 삭제되었습니다!");
         window.location.href = "main.html";
       } else {
-        alert("게시글 삭제에 실패했습니다.");
+        alert(result && result.data.message ? result.data.message : "게시글 삭제에 실패했습니다.");
       }
       deleteModal.style.display = "none";
     });
@@ -356,11 +361,11 @@
     commentModalConfirmBtn.addEventListener("click", async () => {
       // 댓글 삭제 API 호출
       const result = await deleteComment(selectedCommentId);
-      if (result.status === 201 && result.data.code === "SU") {
+      if (result && result.status === 201 && result.data.code === "SU") {
         alert("댓글이 삭제되었습니다!");
         window.location.reload();
       } else {
-        alert("댓글 삭제에 실패했습니다.");
+        alert(result && result.data.message ? result.data.message : "댓글 삭제에 실패했습니다.");
       }
       commentDeleteModal.style.display = "none";
       selectedCommentId = null;
@@ -376,7 +381,7 @@
         return;
       }
       const result = await submitComment(postId, newComment);
-      if (result.data.code === "SU") {
+      if (result && result.data.code === "SU") {
         window.location.reload();
       } else {
         alert("댓글 등록에 실패했습니다.");
