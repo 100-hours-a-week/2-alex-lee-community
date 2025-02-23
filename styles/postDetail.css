@@ -298,3 +298,35 @@
     cursor: pointer;
   }
   
+  /* 댓글 수정 입력창 디자인 */
+.comment-edit-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.comment-edit-input:focus {
+  border-color: #7F6AEE;
+}
+
+/* 댓글 수정 완료 버튼 디자인 */
+.comment-edit-finish-btn {
+  background-color: #7F6AEE;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+
+.comment-edit-finish-btn:hover {
+  background-color: #6954b9;
+}
