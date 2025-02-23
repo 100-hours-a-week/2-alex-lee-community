@@ -13,7 +13,7 @@
     // 로그인 API 호출 함수 (Async/Await 사용)
     const loginApi = async (email, password) => {
       try {
-        const response = await fetch("/users/signin", {
+        const response = await fetch("/auth", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password })

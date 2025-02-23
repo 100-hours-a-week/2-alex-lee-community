@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // API 호출 함수: 회원 정보 수정 (PATCH /users/information)
   const updateUserInfo = async (userId, nickname, profileImage) => {
-    const response = await fetch("/users/information", {
+    const response = await fetch("/users", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

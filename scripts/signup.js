@@ -84,7 +84,7 @@ async function validateAll() {
 // 회원가입 API 호출 (Async/Await 사용)
 async function signupApi(email, password, nickname, profileImage) {
   try {
-    const response = await fetch('/users/signup', {
+    const response = await fetch('/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, nickname, profile_image: profileImage })
