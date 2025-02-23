@@ -71,6 +71,18 @@
     }
   };
 
+  // 댓글 목록 조회 API 호출 함수 (Async/Await 사용)
+  const getComments = async (articleId) => {
+    try {
+      const response = await fetch(`/articles/${articleId}/comments`);
+      const data = await response.json();
+      return { status: response.status, data };
+    } catch (error) {
+      console.error(error);
+      alert("네트워크 오류 발생했습니다.");
+    }
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
     // 헤더 관련 요소
     const headerIcon = document.getElementById("headerIcon");
@@ -113,16 +125,6 @@
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get("id");
 
-    const dummyComments = {
-      1: [
-        { id: 101, author: "alex", date: "2025-02-17 10:00:00", content: "첫 번째 댓글!" },
-        { id: 102, author: "이윤빈", date: "2025-02-17 11:00:00", content: "두 번째 댓글!" }
-      ],
-      2: [
-        { id: 103, author: "케빈", date: "2025-02-17 12:30:00", content: "출근길 힘들죠..." }
-      ]
-    };
-
     fetch("../data/posts.json")
       .then((res) => res.json())
       .then((posts) => {
@@ -134,8 +136,20 @@
         }
         renderPostDetail(post);
 
-        const commentData = dummyComments[post.id] || [];
-        renderComments(commentData);
+        // 댓글 조회 API 연동
+        getComments(postId).then((result) => {
+          if (result.data.code === "SU") {
+            const commentData = result.data.commentList.map((c) => ({
+              id: c.comment_num,
+              author: c.comment_writer,
+              date: c.comment_date,
+              content: c.comment_content
+            }));
+            renderComments(commentData);
+          } else {
+            renderComments([]);
+          }
+        });
       })
       .catch((err) => {
         console.error(err);
