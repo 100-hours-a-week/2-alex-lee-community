@@ -11,6 +11,7 @@ const nicknameHelperText = document.getElementById("nicknameHelperText");
 const signupForm = document.getElementById("signupForm");
 const signupBtn = document.getElementById("signupBtn");
 const toLoginBtn = document.getElementById("toLoginBtn");
+
 const emailRegex = /^[A-Za-z\.]+@[A-Za-z\.]+\.[A-Za-z\.]+$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,20}$/; 
 const nicknameRegex = /^[^\s]{1,10}$/; 
@@ -115,6 +116,22 @@ signupForm.addEventListener("submit", async (e) => {
 
   const result = await signupApi(emailValue, passwordValue, nicknameValue, profileImageValue);
   if (result.status === 201 && result.data.code === "SU") {
+    if (profileImageData) {
+      try {
+        // Node.js의 fs와 path 모듈 사용
+        const fs = require('fs');
+        const path = require('path');
+        const fileName = "profile_" + Date.now() + ".png"; // 임의 파일명 생성
+        // data URL 형식: "data:image/png;base64,...." 에서 base64 데이터 추출
+        const base64Data = profileImageData.replace(/^data:image\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64Data, 'base64');
+        fs.writeFileSync(path.join(__dirname, "../data", fileName), buffer);
+      } catch (err) {
+        alert("회원가입은 완료되었으나, 프로필 이미지 저장에 실패했습니다.");
+        console.error(err);
+        return;
+      }
+    }
     alert("회원가입이 성공적으로 완료되었습니다!");
     window.location.href = "login.html";
   } else {
@@ -143,3 +160,4 @@ profileImageInput.addEventListener("change", (e) => {
 toLoginBtn.addEventListener("click", () => {
   window.location.href = "login.html";
 });
+
