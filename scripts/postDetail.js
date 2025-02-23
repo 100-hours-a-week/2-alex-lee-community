@@ -83,6 +83,27 @@
     }
   };
 
+  // 게시글 삭제 API 호출 함수 (Async/Await 사용)
+  const deletePost = async (articleId) => {
+    const userId = getCookie("user_id");
+    if (!userId) {
+      alert("로그인 정보가 없습니다.");
+      return;
+    }
+    try {
+      const response = await fetch(`/articles/${articleId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId })
+      });
+      const data = await response.json();
+      return { status: response.status, data };
+    } catch (error) {
+      console.error(error);
+      alert("네트워크 오류 발생했습니다.");
+    }
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
     // 헤더 관련 요소
     const headerIcon = document.getElementById("headerIcon");
@@ -138,7 +159,7 @@
 
         // 댓글 조회 API 연동
         getComments(postId).then((result) => {
-          if (result.data.code === "SU") {
+          if (result && result.status === 200 && result.data.code === "SU") {
             const commentData = result.data.commentList.map((c) => ({
               id: c.comment_num,
               author: c.comment_writer,
@@ -309,8 +330,15 @@
       deleteModal.style.display = "none";
     });
 
-    modalConfirmBtn.addEventListener("click", () => {
-      alert("게시글이 삭제되었습니다 (예시).");
+    // 게시글 삭제 API 연동
+    modalConfirmBtn.addEventListener("click", async () => {
+      const result = await deletePost(postId);
+      if (result.data.code === "SU") {
+        alert("게시글이 삭제되었습니다!");
+        window.location.href = "main.html";
+      } else {
+        alert("게시글 삭제에 실패했습니다.");
+      }
       deleteModal.style.display = "none";
     });
 
@@ -332,7 +360,7 @@
         alert("댓글이 삭제되었습니다!");
         window.location.reload();
       } else {
-        alert(result.data.message || "댓글 삭제에 실패했습니다.");
+        alert("댓글 삭제에 실패했습니다.");
       }
       commentDeleteModal.style.display = "none";
       selectedCommentId = null;
