@@ -179,47 +179,63 @@
 
     function renderPostDetail(post) {
       const postHeader = document.getElementById("postHeader");
-
+    
       const titleElem = document.createElement("h2");
       titleElem.className = "post-header-title";
       titleElem.textContent = post.post_title;
-
+    
       const headerMeta = document.createElement("div");
       headerMeta.className = "post-header-meta";
-
+    
       const authorDateElem = document.createElement("div");
       authorDateElem.className = "post-author-date";
-      authorDateElem.textContent = `${post.post_writer} | ${post.post_date}`;
-
+      const formattedDate = post.post_date.replace("T", " ");
+      authorDateElem.textContent = `${post.post_writer} | ${formattedDate}`;
+    
       const actionsElem = document.createElement("div");
       actionsElem.className = "post-actions";
-
+    
       const editBtn = document.createElement("button");
       editBtn.className = "action-btn";
       editBtn.textContent = "수정";
       editBtn.addEventListener("click", () => {
         window.location.href = `postEdit.html?id=${post.post_id}`;
       });
-
+    
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "action-btn";
       deleteBtn.textContent = "삭제";
       deleteBtn.addEventListener("click", () => {
         deleteModal.style.display = "flex";
       });
-
+    
       actionsElem.appendChild(editBtn);
       actionsElem.appendChild(deleteBtn);
-
+    
       headerMeta.appendChild(authorDateElem);
       headerMeta.appendChild(actionsElem);
-
+    
       postHeader.appendChild(titleElem);
       postHeader.appendChild(headerMeta);
-
+    
       const postBody = document.getElementById("postBody");
-      postBody.textContent = post.post_content;
-
+      postBody.innerHTML = "";
+    
+      // 이미지가 있으면 표시
+      if (post.post_image && post.post_image.trim() !== "") {
+        const imgElem = document.createElement("img");
+        imgElem.src = post.post_image;
+        imgElem.alt = "게시글 이미지";
+        imgElem.className = "post-image"; // CSS로 스타일 조절 가능
+        postBody.appendChild(imgElem);
+      }
+    
+      // 본문 텍스트 표시
+      const contentElem = document.createElement("div");
+      contentElem.className = "post-content";
+      contentElem.textContent = post.post_content;
+      postBody.appendChild(contentElem);
+    
       const postFooter = document.getElementById("postFooter");
       postFooter.innerHTML = `
         <div class="footer-item">
