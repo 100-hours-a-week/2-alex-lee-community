@@ -11,14 +11,14 @@
   // 게시글 작성 API 호출 함수 (Async/Await 사용)
   const createPostApi = async (userId, title, content, image) => {
     try {
-      const response = await fetch("/articles", {
+      const response = await fetch("http://localhost:8080/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: userId,
-          article_title: title,
-          article_content: content,
-          article_image: image
+          post_title: title,
+          post_content: content,
+          post_image: image
         })
       });
       const data = await response.json();
@@ -44,7 +44,7 @@
 
       const postTitle = document.getElementById("postTitle").value.trim();
       const postContent = document.getElementById("postContent").value.trim();
-      const articleImage =
+      const postImage =
         document.getElementById("postImageInput")?.value.trim() || "";
 
       if (!postTitle || !postContent) {
@@ -59,7 +59,7 @@
         return;
       }
 
-      const result = await createPostApi(userId, postTitle, postContent, articleImage);
+      const result = await createPostApi(userId, postTitle, postContent, postImage);
       if (result && result.data.code === "SU") {
         alert("게시글이 업로드되었습니다!");
         window.location.href = "main.html";
