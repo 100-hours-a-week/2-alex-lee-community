@@ -5,7 +5,6 @@
   <title>아무 말 대잔치 - 회원정보수정</title>
   <link rel="stylesheet" href="../styles/mypage.css" />
   <style>
-    /* 간단한 토스트 메시지 스타일 */
     .toast {
       position: fixed;
       bottom: 20px;
@@ -45,22 +44,20 @@
     <h2 class="mypage-title">회원정보수정</h2>
 
     <div class="profile-section">
-      <label for="profileImage" class="profile-label">
-        <div class="profile-circle">
-          <button type="button" class="profile-change-btn">변경</button>
-        </div>
-      </label>
+      <div class="profile-circle">
+        <button type="button" class="profile-change-btn">변경</button>
+      </div>
       <input type="file" id="profileImage" accept="image/*" style="display: none;" />
     </div>
 
     <form id="userInfoForm">
       <div class="form-group">
-        <label>이메일</label>
-        <p class="static-email">kanado@naber.com</p>
+        <label>현재 닉네임</label>
+        <p class="static-email">로딩 중...</p>
       </div>
 
       <div class="form-group">
-        <label for="nickname">닉네임</label>
+        <label for="nickname">새 닉네임</label>
         <input type="text" id="nickname" placeholder="닉네임" />
       </div>
 
@@ -71,10 +68,8 @@
     <button type="button" class="complete-btn" id="completeBtn">수정완료</button>
   </main>
 
-  <!-- 토스트 메시지 엘리먼트 -->
   <div id="toast" class="toast" style="display: none;"></div>
 
-  <!-- 회원 탈퇴 모달 -->
   <div class="modal-overlay" id="withdrawModal">
     <div class="modal-box">
       <h2 class="modal-title">회원탈퇴 하시겠습니까?</h2>
@@ -85,7 +80,6 @@
       </div>
     </div>
   </div>
-
   <script type="module" src="../scripts/mypage.js"></script>
 </body>
 </html>

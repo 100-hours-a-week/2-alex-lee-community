@@ -17,7 +17,7 @@ const validatePasswords = (newPw, confirmPw) => {
 // 비밀번호 수정 API 호출 (Async/Await 사용)
 const updatePassword = async (userId, newPassword) => {
   try {
-    const response = await fetch('/users/password', {
+    const response = await fetch('http://localhost:8080/users/password', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: userId, password: newPassword })
