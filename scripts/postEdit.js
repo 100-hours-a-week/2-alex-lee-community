@@ -9,9 +9,9 @@
       }, "");
 
   // 특정 게시글 반환 API 호출 함수 (Async/Await 사용)
-  const getArticle = async (articleId) => {
+  const getPost = async (postId) => {
     try {
-      const response = await fetch(`/articles/${articleId}`);
+      const response = await fetch(`http://localhost:8080/posts/${postId}`);
       const data = await response.json();
       return { status: response.status, data };
     } catch (error) {
@@ -21,16 +21,16 @@
   };
 
   // 게시글 수정 API 호출 함수 (Async/Await 사용)
-  const updateArticle = async (articleId, userId, title, content, image) => {
+  const updatePost = async (postId, userId, title, content, image) => {
     try {
-      const response = await fetch(`/articles/${articleId}`, {
+      const response = await fetch(`http://localhost:8080/posts/${postId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: userId,
-          article_title: title,
-          article_content: content,
-          article_image: image
+          post_title: title,
+          post_content: content,
+          post_image: image
         })
       });
       const data = await response.json();
@@ -87,11 +87,11 @@
     const editForm = document.getElementById("editForm");
 
     // 게시글 반환 API 호출하여 수정폼에 기존 데이터 채우기
-    const articleResult = await getArticle(postId);
-    if (articleResult && articleResult.status === 200 && articleResult.data.code === "SU") {
-      const article = articleResult.data;
-      editTitleInput.value = article.article_title;
-      editContentInput.value = article.article_content;
+    const postResult = await getPost(postId);
+    if (postResult && postResult.status === 200 && postResult.data.code === "SU") {
+      const post = postResult.data;
+      editTitleInput.value = post.post_title;
+      editContentInput.value = post.post_content;
     } else {
       alert("게시글 정보를 불러오는 중 오류가 발생했습니다.");
       window.location.href = "main.html";
@@ -117,12 +117,14 @@
         return;
       }
 
-      const updateResult = await updateArticle(postId, userId, titleVal, contentVal, imageVal);
+      const updateResult = await updatePost(postId, userId, titleVal, contentVal, imageVal);
       if (updateResult && updateResult.data.code === "SU") {
         alert("게시글이 수정되었습니다!");
         window.location.href = `postDetail.html?id=${postId}`;
+      } else if (updateResult && updateResult.data.code === "PE") {
+        alert("게시글 수정 권한이 없습니다.");
       } else {
-        alert("게시글 수정에 실패했습니다.");
+        alert(updateResult?.data?.message || "게시글 수정에 실패했습니다.");
       }
     });
   });
