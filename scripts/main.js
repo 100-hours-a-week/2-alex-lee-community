@@ -74,51 +74,56 @@
   });
 
   // 게시글 목록 렌더링 함수
-  function renderPosts(articles) {
-    const postList = document.getElementById("postList");
-    postList.innerHTML = "";
-  
-    articles.forEach((article) => {
-      const postItem = document.createElement("div");
-      postItem.className = "post-item";
-  
-      const titleElem = document.createElement("h3");
-      titleElem.className = "post-title";
-      titleElem.textContent = article.post_title;
-  
-      const metaRow = document.createElement("div");
-      metaRow.className = "post-meta-row";
-  
-      const leftMeta = document.createElement("div");
-      leftMeta.className = "left-meta";
-      leftMeta.textContent = `조회수: ${article.view_count} | 댓글수: ${article.comment_count} | 좋아요수: ${article.like_count}`;
-  
-      const rightMeta = document.createElement("div");
-      rightMeta.className = "right-meta";
-      const formattedDate = article.post_date.replace("T", " ");
-      rightMeta.textContent = formattedDate;
-  
-      metaRow.appendChild(leftMeta);
-      metaRow.appendChild(rightMeta);
-  
-      const authorDivider = document.createElement("hr");
-      authorDivider.className = "author-divider";
-  
-      const authorElem = document.createElement("p");
-      authorElem.className = "post-author";
-      authorElem.textContent = `작성자: ${article.post_writer}`;
-  
-      // 게시글 클릭 시 상세 페이지로 이동
-      postItem.addEventListener("click", () => {
-        window.location.href = `postDetail.html?id=${article.post_num}`;
-      });
-  
-      postItem.appendChild(titleElem);
-      postItem.appendChild(metaRow);
-      postItem.appendChild(authorDivider);
-      postItem.appendChild(authorElem);
-  
-      postList.appendChild(postItem);
+  // 게시글 목록 렌더링 함수
+function renderPosts(articles) {
+  const postList = document.getElementById("postList");
+  postList.innerHTML = "";
+
+  // 역순 정렬 (원본 배열 훼손하지 않음)
+  const reversedArticles = articles.slice().reverse();
+
+  reversedArticles.forEach((article) => {
+    const postItem = document.createElement("div");
+    postItem.className = "post-item";
+
+    const titleElem = document.createElement("h3");
+    titleElem.className = "post-title";
+    titleElem.textContent = article.post_title;
+
+    const metaRow = document.createElement("div");
+    metaRow.className = "post-meta-row";
+
+    const leftMeta = document.createElement("div");
+    leftMeta.className = "left-meta";
+    leftMeta.textContent = `조회수: ${article.view_count} | 댓글수: ${article.comment_count} | 좋아요수: ${article.like_count}`;
+
+    const rightMeta = document.createElement("div");
+    rightMeta.className = "right-meta";
+    const formattedDate = article.post_date.replace("T", " ");
+    rightMeta.textContent = formattedDate;
+
+    metaRow.appendChild(leftMeta);
+    metaRow.appendChild(rightMeta);
+
+    const authorDivider = document.createElement("hr");
+    authorDivider.className = "author-divider";
+
+    const authorElem = document.createElement("p");
+    authorElem.className = "post-author";
+    authorElem.textContent = `작성자: ${article.post_writer}`;
+
+    // 게시글 클릭 시 상세 페이지로 이동
+    postItem.addEventListener("click", () => {
+      window.location.href = `postDetail.html?id=${article.post_num}`;
     });
-  }  
+
+    postItem.appendChild(titleElem);
+    postItem.appendChild(metaRow);
+    postItem.appendChild(authorDivider);
+    postItem.appendChild(authorElem);
+
+    postList.appendChild(postItem);
+  });
+}
+
 })();
