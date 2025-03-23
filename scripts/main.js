@@ -11,7 +11,7 @@
   // 모든 게시글 반환 API 호출 함수 (Async/Await 사용)
   const getArticles = async () => {
     try {
-      const response = await fetch("/articles");
+      const response = await fetch("http://localhost:8080/posts");
       const data = await response.json();
       return { status: response.status, data };
     } catch (error) {
@@ -77,47 +77,48 @@
   function renderPosts(articles) {
     const postList = document.getElementById("postList");
     postList.innerHTML = "";
-
+  
     articles.forEach((article) => {
       const postItem = document.createElement("div");
       postItem.className = "post-item";
-
+  
       const titleElem = document.createElement("h3");
       titleElem.className = "post-title";
-      titleElem.textContent = article.article_title;
-
+      titleElem.textContent = article.post_title;
+  
       const metaRow = document.createElement("div");
       metaRow.className = "post-meta-row";
-
+  
       const leftMeta = document.createElement("div");
       leftMeta.className = "left-meta";
       leftMeta.textContent = `조회수: ${article.view_count} | 댓글수: ${article.comment_count} | 좋아요수: ${article.like_count}`;
-
+  
       const rightMeta = document.createElement("div");
       rightMeta.className = "right-meta";
-      rightMeta.textContent = article.article_date;
-
+      const formattedDate = article.post_date.replace("T", " ");
+      rightMeta.textContent = formattedDate;
+  
       metaRow.appendChild(leftMeta);
       metaRow.appendChild(rightMeta);
-
+  
       const authorDivider = document.createElement("hr");
       authorDivider.className = "author-divider";
-
+  
       const authorElem = document.createElement("p");
       authorElem.className = "post-author";
-      authorElem.textContent = `작성자: ${article.article_writer}`;
-
+      authorElem.textContent = `작성자: ${article.post_writer}`;
+  
       // 게시글 클릭 시 상세 페이지로 이동
       postItem.addEventListener("click", () => {
-        window.location.href = `postDetail.html?id=${article.article_num}`;
+        window.location.href = `postDetail.html?id=${article.post_num}`;
       });
-
+  
       postItem.appendChild(titleElem);
       postItem.appendChild(metaRow);
       postItem.appendChild(authorDivider);
       postItem.appendChild(authorElem);
-
+  
       postList.appendChild(postItem);
     });
-  }
+  }  
 })();
