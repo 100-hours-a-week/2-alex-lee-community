@@ -38,6 +38,7 @@
       if (!result) return; // 네트워크 오류 등으로 응답 없을 경우 종료
   
       if (result.data.code === "SU") {
+        // console.log(result.data.user_id);
         setCookie("user_id", result.data.user_id);
         window.location.href = "main.html";
       } else if (result.data.code === "SF") {
